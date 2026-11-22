@@ -39,11 +39,11 @@ export default function Navbar() {
             </span>
 
             <span className="text-xl font-semibold tracking-[-0.07em] text-white">
-              Solve<span className="text-[#BE91FF]">Oi</span>
+              Solve
+              <span className="text-[#BE91FF]">Oi</span>
             </span>
           </Link>
 
-          {/* Center navigation capsule */}
           <nav
             aria-label="Main navigation"
             className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/[0.085] bg-black/30 p-1.5 lg:flex"
@@ -70,7 +70,7 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="hidden shrink-0 items-center gap-4 lg:flex">
+          <div className="hidden shrink-0 items-center gap-3 lg:flex">
             <Link
               href="/login"
               className="text-xs font-medium text-white/55 transition hover:text-white"
@@ -79,17 +79,26 @@ export default function Navbar() {
             </Link>
 
             <Link
+              href="/signup"
+              className="inline-flex items-center gap-2 rounded-xl border border-violet-400/40 bg-violet-500/20 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-violet-500/30"
+            >
+              Get Started
+              <ArrowUpRight size={15} />
+            </Link>
+
+            <Link
               href="/demo"
-              className="inline-flex items-center gap-2 rounded-xl border border-violet-400/40 bg-violet-500/15 px-4 py-2.5 text-xs font-semibold text-white shadow-[0_0_24px_rgba(134,54,231,0.12)] transition hover:border-violet-300/60 hover:bg-violet-500/25"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2.5 text-xs font-semibold text-white/85 transition hover:border-violet-300/40 hover:bg-white/10"
             >
               Request a Demo
-              <ArrowUpRight size={15} />
             </Link>
           </div>
 
           <button
             type="button"
-            aria-label={open ? "Close navigation" : "Open navigation"}
+            aria-label={
+              open ? "Close navigation" : "Open navigation"
+            }
             aria-expanded={open}
             aria-controls="solveoi-mobile-nav"
             onClick={() => setOpen((value) => !value)}
@@ -108,10 +117,10 @@ export default function Navbar() {
         >
           {[
             ...links,
-            { name: "Contact", href: "/contact" },
-            { name: "Documentation", href: "/docs" },
             { name: "Log in", href: "/login" },
+            { name: "Get Started", href: "/signup" },
             { name: "Request a Demo", href: "/demo" },
+            { name: "Contact", href: "/contact" },
           ].map((link) => (
             <Link
               key={link.href}

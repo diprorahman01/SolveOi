@@ -3,10 +3,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { LockKeyhole } from "lucide-react";
+
 import Container from "@/components/layout/Container";
 
 export const metadata: Metadata = {
-  title: "Customer Login",
+  title: "Log In",
+  description: "Sign in to your SolveOi business workspace.",
   robots: {
     index: false,
     follow: false,
@@ -14,12 +16,14 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  const customerAppUrl = process.env.CUSTOMER_APP_URL;
+  const customerAppUrl =
+    process.env.CUSTOMER_APP_URL ||
+    (process.env.NODE_ENV === "development"
+      ? "http://localhost:3001"
+      : "");
 
   if (customerAppUrl) {
-    redirect(
-      new URL("/sign-in", customerAppUrl).toString()
-    );
+    redirect(new URL("/sign-in", customerAppUrl).toString());
   }
 
   return (
@@ -35,8 +39,8 @@ export default function LoginPage() {
           </h1>
 
           <p className="mt-5 leading-8 text-white/60">
-            Customer authentication has not been configured
-            for this deployment yet.
+            Customer authentication is temporarily unavailable.
+            Please contact SolveOi for assistance.
           </p>
 
           <Link
