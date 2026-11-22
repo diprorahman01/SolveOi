@@ -23,7 +23,10 @@ export async function requireWorkspace() {
   if (!activeMember) redirect("/choose-workspace");
   const activeOrganization = await auth.api.getFullOrganization({headers: requestHeaders});
   if (!activeOrganization) redirect("/choose-workspace");
-  const role = activeMember.role.split(",").includes("owner") ? "owner" : "member";
+  const role: "owner" | "member" =
+  activeMember.role.split(",").includes("owner")
+    ? "owner"
+    : "member";
   return {identity, member:activeMember, organization:activeOrganization, role};
 }
 
