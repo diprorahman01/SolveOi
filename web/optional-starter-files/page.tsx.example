@@ -1,0 +1,12 @@
+import Link from "next/link";
+
+export default function HomePage() {
+  return (
+    <main className="mx-auto min-h-screen max-w-6xl px-6 py-24">
+      <p className="mb-4 text-sm tracking-[0.2em] uppercase text-teal-500">SolveOi · Intelligence That Solves</p>
+      <h1 className="max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl">Real problems. Intelligent solutions.</h1>
+      <p className="mt-6 max-w-2xl text-lg opacity-75">Practical AI tools for the work your business does every day.</p>
+      <Link href="/solutions" className="mt-10 inline-block rounded-lg bg-teal-600 px-5 py-3 font-medium text-white">Explore solutions</Link>
+    </main>
+  );
+}

@@ -1,0 +1,6 @@
+Existing app files intentionally NOT overwritten:
+- layout.tsx
+- page.tsx
+- globals.css
+
+Your `create-next-app` project already has these. Keep them.
