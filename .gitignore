@@ -1,0 +1,15 @@
+# Node / Next
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+# Secrets
+.env
+.env.*
+!.env.example
+# Logs/editor
+*.log
+.DS_Store
+.vscode/
