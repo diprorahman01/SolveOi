@@ -352,9 +352,34 @@ export default function Hero() {
       </div>
 
       {/* NEW: Second animated object — top left */}
-      <div className="pointer-events-none absolute left-[max(8px,calc((100vw-1540px)/2))] top-[40px] z-[2] hidden w-[280px] 2xl:block">
-        <FloatingStar />
-      </div>
+      
+{/* Responsive animated star — visible on all screen sizes */}
+<div
+  aria-hidden="true"
+  className="
+    pointer-events-none
+    absolute
+    z-[2]
+    left-2
+    top-4
+    w-[72px]
+    sm:left-5
+    sm:top-8
+    sm:w-[100px]
+    md:left-8
+    md:top-10
+    md:w-[130px]
+    lg:left-10
+    lg:top-12
+    lg:w-[150px]
+    2xl:left-[max(8px,calc((100vw-1540px)/2))]
+    2xl:top-[40px]
+    2xl:w-[280px]
+  "
+>
+  <FloatingStar />
+</div>
+
 
       <Container className="relative">
         {/* Hero introduction — reduced vertical spacing */}
