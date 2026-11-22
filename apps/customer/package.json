@@ -10,7 +10,10 @@
     "typecheck": "tsc --noEmit",
     "check:m3": "node scripts/check-m3.mjs",
     "db:test": "node --env-file=.env.local scripts/test-mongodb.mjs",
-    "admin:promote": "node --env-file=.env.local scripts/promote-admin.mjs"
+    "admin:promote": "node --env-file=.env.local scripts/promote-admin.mjs",
+    "m5:setup": "node --env-file=.env.local scripts/m5-setup.mjs",
+    "m5:worker": "node --env-file=.env.local scripts/m5-worker.mjs",
+    "m5:worker:once": "node --env-file=.env.local scripts/m5-worker.mjs --once"
   },
   "dependencies": {
     "next": "16.4.6",
