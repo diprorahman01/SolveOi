@@ -1,0 +1,11 @@
+#solveoi-quote-print { display: none; }
+@media print {
+  @page { size: A4; margin: 18mm; }
+  body { background: white !important; color: #111 !important; }
+  body * { visibility: hidden !important; }
+  #solveoi-quote-print, #solveoi-quote-print * { visibility: visible !important; }
+  #solveoi-quote-print { display: block !important; position: absolute; inset: 0; width: 100%; background: white !important; color: #111 !important; font-family: Arial, sans-serif; padding: 16px; }
+  #solveoi-quote-print table { width: 100%; border-collapse: collapse; }
+  #solveoi-quote-print td, #solveoi-quote-print th { border: 1px solid #aaa; padding: 9px; text-align: left; }
+  #solveoi-quote-print .totals { margin-top: 24px; text-align: right; }
+}

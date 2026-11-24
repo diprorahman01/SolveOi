@@ -14,7 +14,7 @@ export default function M5EmployeeGrants({ members, products }: { members: Array
       const response = await fetch("/api/m5/grants", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId, productId, enabled }) });
       const data = await response.json() as { error?: string };
       if (!response.ok) throw new Error(data.error || "Unable to update permission");
-      setNotice("Employee permission saved. Product remains Coming Soon."); router.refresh();
+      setNotice("Employee permission saved. Internal beta access also requires the organization entitlement."); router.refresh();
     } catch (error) { setNotice(error instanceof Error ? error.message : "Permission update failed"); }
     finally { setBusy(false); }
   }

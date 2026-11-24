@@ -21,7 +21,7 @@ const adminNav = [
 export default function DashboardShell({ title, subtitle, name, role, children }: Props) {
   const isAdmin = role === "admin";
   const links = isAdmin ? adminNav : role === "owner"
-    ? [...customerNav.slice(0, 3), { href: "/app/team", label: "Team management", icon: Users }, ...customerNav.slice(3)]
+    ? [...customerNav.slice(0, 3), { href: "/app/team", label: "Team management", icon: Users }, ...customerNav.slice(3), { href: "/app/billing", label: "Plans & billing", icon: ClipboardCheck }]
     : customerNav;
   const items = <nav aria-label="Workspace navigation" className="space-y-1.5">
     {links.map(({ href, label, icon: Icon }) => <Link key={href} href={href} className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-white/70 transition hover:bg-violet-400/10 hover:text-white"><Icon size={18} className="shrink-0 text-violet-300" aria-hidden="true"/>{label}</Link>)}

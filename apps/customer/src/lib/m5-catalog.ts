@@ -5,17 +5,17 @@ export type ProductDefinition = {
   name: string;
   category: string;
   description: string;
-  status: "coming_soon";
+  status: "internal_beta";
 };
 
-// Deliberately do not mark the six unreleased products as available.
+// Six internally testable product workflows; paid/public release is NOT enabled.
 export const PRODUCTS: readonly ProductDefinition[] = [
-  { id: "quote", name: "SolveOi Quote", category: "Sales", description: "Prepare and review quotations from customer requests.", status: "coming_soon" },
-  { id: "extract", name: "SolveOi Extract", category: "Documents", description: "Structure approved information from business documents.", status: "coming_soon" },
-  { id: "collect", name: "SolveOi Collect", category: "Finance", description: "Assist with invoice and payment follow-up workflows.", status: "coming_soon" },
-  { id: "follow", name: "SolveOi Follow", category: "Sales", description: "Organize customer follow-ups and sales conversations.", status: "coming_soon" },
-  { id: "respond", name: "SolveOi Respond", category: "Support", description: "Draft support answers for human review.", status: "coming_soon" },
-  { id: "hr-desk", name: "SolveOi HR Desk", category: "People", description: "Assist growing teams with approved HR knowledge.", status: "coming_soon" },
+  { id: "quote", name: "SolveOi Quote", category: "Sales", description: "Prepare and review quotations from customer requests.", status: "internal_beta" },
+  { id: "extract", name: "SolveOi Extract", category: "Documents", description: "Structure approved information from business documents.", status: "internal_beta" },
+  { id: "collect", name: "SolveOi Collect", category: "Finance", description: "Assist with invoice and payment follow-up workflows.", status: "internal_beta" },
+  { id: "follow", name: "SolveOi Follow", category: "Sales", description: "Organize customer follow-ups and sales conversations.", status: "internal_beta" },
+  { id: "respond", name: "SolveOi Respond", category: "Support", description: "Draft support answers for human review.", status: "internal_beta" },
+  { id: "hr-desk", name: "SolveOi HR Desk", category: "People", description: "Assist growing teams with approved HR knowledge.", status: "internal_beta" },
 ];
 
 export function isProductId(value: string): value is ProductId {

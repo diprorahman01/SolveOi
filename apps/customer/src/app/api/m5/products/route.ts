@@ -11,5 +11,5 @@ export async function GET() {
     entitlements().find({ organizationId: access.ctx.organizationId }).toArray(),
     grants().find({ organizationId: access.ctx.organizationId, userId: access.ctx.userId }).toArray(),
   ]);
-  return NextResponse.json({ products: PRODUCTS.map(product => ({ ...product, entitled: Boolean(existing.find(item => item.productId === product.id)?.enabled), employeeGranted: access.ctx.role === "owner" || Boolean(userGrants.find(item => item.productId === product.id)?.enabled), usable: false })) }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ products: PRODUCTS.map(product => ({ ...product, entitled: Boolean(existing.find(item => item.productId === product.id)?.enabled), employeeGranted: access.ctx.role === "owner" || Boolean(userGrants.find(item => item.productId === product.id)?.enabled), usable: (Boolean(existing.find(item => item.productId === product.id)?.enabled) || (process.env.SOLVEOI_INTERNAL_PRODUCT_PREVIEW === "true" && process.env.NODE_ENV !== "production")) && (access.ctx.role === "owner" || Boolean(userGrants.find(item => item.productId === product.id)?.enabled)) })) }, { headers: { "Cache-Control": "no-store" } });
 }
