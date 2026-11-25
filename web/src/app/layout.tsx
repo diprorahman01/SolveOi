@@ -68,8 +68,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${geist.className} flex min-h-screen flex-col bg-[#090710] text-white antialiased`}
-      >
+  className={`${geist.className} flex min-h-screen flex-col bg-[#FFFBF6] text-[#302017] antialiased`}
+>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-black"

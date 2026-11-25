@@ -1,14 +1,176 @@
 @import "tailwindcss";
-:root {color-scheme:dark}
+
+/* SolveOi workspace shared theme: the same soft apricot + deep orange family
+   as the public website. Keeps auth, admin, owner and employee UIs consistent. */
+:root {
+  color-scheme:dark;
+  --so-bg:#45302a;
+  --so-ivory:#fff8ef;
+  --so-muted:#f0d4c0;
+  --so-soft-orange:#ffc28e;
+  --so-line:rgba(255,209,171,.32);
+  --so-dark-page:radial-gradient(ellipse 72% 51% at 8% 0%,rgba(255,195,130,.19),transparent 68%),
+    radial-gradient(ellipse 62% 55% at 94% 77%,rgba(247,137,93,.14),transparent 73%),
+    linear-gradient(135deg,#503128 0%,#664033 45%,#362a28 100%);
+  --so-panel:linear-gradient(141deg,#80513e 0%,#664334 47%,#44312d 100%);
+  --so-panel-soft:linear-gradient(134deg,rgba(255,222,190,.14),rgba(137,77,55,.19));
+  --so-button:linear-gradient(107deg,#ffe1bb,#ffbf86 58%,#f1a06b);
+}
 * {box-sizing:border-box}
-body {margin:0; background:#090610; color:#f7f2ff; font-family:Arial,Helvetica,sans-serif}
-:focus-visible {outline:2px solid #c59cff;outline-offset:3px}
-.bg-atmosphere{background:radial-gradient(ellipse at 15% 10%,rgba(123,63,197,.23),transparent 43%),radial-gradient(ellipse at 85% 70%,rgba(94,40,166,.21),transparent 50%),#090610}
-.glass{background:rgba(23,15,37,.82);border:1px solid rgba(196,151,255,.16);backdrop-filter:blur(18px)}
-.field{display:block;width:100%;height:45px;padding:10px 13px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:white;outline:none}
-.field:focus{border-color:#bd8dff}
-.button{display:inline-flex;justify-content:center;align-items:center;gap:8px;min-height:43px;border-radius:12px;padding:10px 17px;background:#f0e5ff;color:#170c26;font-weight:700;cursor:pointer}
-.button:disabled{opacity:.5;cursor:not-allowed}
-.outline-button{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid rgba(255,255,255,.2);border-radius:12px;cursor:pointer}
-.muted{color:rgba(255,255,255,.52)}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+html {scroll-behavior:smooth}
+body {margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--so-ivory);background:var(--so-dark-page);min-height:100vh}
+.bg-atmosphere {background:var(--so-dark-page)!important;min-height:100vh}
+::selection {color:#42291f;background:#ffcb98}
+:focus-visible {outline:2px solid #ffd3a2;outline-offset:3px}
+
+/* Workspace brand topbar and sidebar/panels. */
+body>header {background:linear-gradient(105deg,rgba(80,48,39,.97),rgba(112,68,50,.96),rgba(67,44,39,.97))!important;border-color:var(--so-line)!important;box-shadow:0 10px 28px rgba(46,24,22,.12)}
+.glass {background:linear-gradient(142deg,rgba(251,213,173,.16),rgba(102,60,47,.59))!important;border:1px solid var(--so-line);backdrop-filter:blur(18px)}
+:is(section,article,div,aside,details,form)[class*="rounded-"][class*="bg-[#"] {
+  background:var(--so-panel)!important;border-color:var(--so-line)!important;
+  box-shadow:inset 0 1px 0 rgba(255,239,218,.10),0 13px 35px rgba(44,25,23,.11);
+  color:var(--so-ivory);
+}
+/* Translucent cards and inline tool previews. */
+:is(section,article,div,aside,details,form)[class*="rounded-"][class*="bg-white/"] {
+  background:var(--so-panel-soft)!important;border-color:var(--so-line)!important;
+}
+:is(section,article,div,aside,details,form)[class~="bg-white"] {
+  background:linear-gradient(133deg,#fffefa,#ffe8d3)!important;border-color:#e9bfa0!important;color:#402a22!important;
+}
+
+/* Decorative legacy purple accents: warm them up without touching alert colors. */
+[class*="border-violet-"],[class*="border-purple-"],[class*="border-fuchsia-"] {border-color:var(--so-line)!important}
+[class*="bg-violet-"],[class*="bg-purple-"],[class*="bg-fuchsia-"] {background-color:rgba(255,180,128,.15)!important}
+[class*="hover:bg-violet-"]:hover,[class*="hover:bg-purple-"]:hover,[class*="hover:bg-fuchsia-"]:hover {background-color:rgba(255,186,129,.22)!important}
+[class*="hover:border-violet-"]:hover {border-color:#ffcd9b!important}
+[class*="focus:border-violet-"]:focus {border-color:#ffcb95!important}
+[class*="focus:ring-violet-"]:focus {--tw-ring-color:rgba(255,188,137,.30)!important}
+[class~="text-violet-100"],[class~="text-purple-100"],[class~="text-fuchsia-100"] {color:#fff4e6!important}
+[class~="text-violet-200"],[class~="text-purple-200"],[class~="text-fuchsia-200"] {color:#ffe2be!important}
+[class~="text-violet-300"],[class~="text-purple-300"],[class~="text-fuchsia-300"] {color:#ffca98!important}
+[class~="text-violet-400"],[class~="text-purple-400"],[class~="text-fuchsia-400"] {color:#ffb878!important}
+[class*="hover:text-violet-"]:hover {color:#ffe8cf!important}
+
+/* Dark panel text contrast: bring secondary labels above readable contrast. */
+.text-white\/30,.text-white\/35,.text-white\/40,.text-white\/45 {color:rgba(255,243,229,.78)!important}
+.text-white\/50,.text-white\/55,.text-white\/60 {color:rgba(255,241,225,.85)!important}
+.text-white\/65,.text-white\/70 {color:rgba(255,246,233,.91)!important}
+.muted {color:#eed2bb}
+/* Bright labels should not be assigned to a cream card, if present. */
+:is(section,article,div,aside,form)[class~="bg-white"] [class*="text-white/"] {color:#6b4c3d!important}
+:is(section,article,div,aside,form)[class~="bg-white"] [class*="text-violet-"] {color:#9c4e32!important}
+
+/* Fields, dropdown menus and textareas. */
+.field {
+  display:block;width:100%;min-height:45px;padding:10px 13px;border-radius:12px;
+  border:1px solid rgba(255,207,169,.38);background:linear-gradient(128deg,rgba(255,239,217,.12),rgba(78,48,42,.60));
+  color:var(--so-ivory);outline:none;
+}
+.field:focus {border-color:#ffcc98;box-shadow:0 0 0 3px rgba(255,190,138,.17)}
+:is(input:not([type="checkbox"]):not([type="radio"]),textarea,select)[class*="bg-[#"] {
+  background:linear-gradient(131deg,rgba(255,236,209,.11),rgba(68,46,41,.69))!important;
+  border-color:rgba(255,208,164,.37)!important;color:#fff8ee!important;
+}
+input::placeholder,textarea::placeholder {color:#e8ccb8!important;opacity:1}
+input,textarea,select {accent-color:#f6a46b}
+select option {background:#52372d;color:#fff9f0}
+
+/* Primary and secondary actions. Dark text is only used on LIGHT buttons. */
+.button {
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:43px;
+  padding:10px 17px;border-radius:12px;background:var(--so-button)!important;
+  color:#40291f!important;font-weight:700;cursor:pointer;
+  box-shadow:0 8px 22px rgba(80,41,27,.14);
+}
+.button:hover:not(:disabled) {filter:brightness(1.05)}
+.button:disabled {opacity:.55;cursor:not-allowed}
+.outline-button {display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--so-line);border-radius:12px;cursor:pointer;color:#ffe2be;background:var(--so-panel-soft)}
+.outline-button:hover {background:linear-gradient(130deg,rgba(255,205,152,.22),rgba(239,155,98,.13));border-color:#ffd2a2}
+:is(button,a)[class*="bg-violet-200"],:is(button,a)[class*="bg-violet-100"],:is(button,a)[class*="bg-[#e8d9ff"] {
+  background:var(--so-button)!important;color:#38241e!important;border-color:rgba(212,121,67,.25)!important;
+}
+[class*="text-[#170c26"] {color:#38241e!important}
+:is(button,a):not(:disabled) {transition:color .18s,background-color .18s,border-color .18s,box-shadow .18s,transform .18s,filter .18s}
+
+/* Ensure quotation print/export is never affected by the dark workspace theme. */
+@media print {
+  body,.bg-atmosphere,body>header {background:white!important;color:#111!important;box-shadow:none!important}
+  #solveoi-quote-print,#solveoi-quote-print * {color:#111!important;background:white!important;box-shadow:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ------------------------------------------------------------------------
+   SOLVEOI WORKSPACE — CLIENT LIGHT / APRICOT GRADIENT EDITION
+   Applies to owner, member, admin, product tools, auth and billing views.
+   ------------------------------------------------------------------------ */
+:root {
+  color-scheme:light;
+  --so-bg:#fff9f2;
+  --so-ivory:#3a2921;
+  --so-muted:#71594b;
+  --so-soft-orange:#ce7443;
+  --so-line:rgba(167,100,58,.25);
+  --so-dark-page:radial-gradient(ellipse 62% 55% at 93% 2%,rgba(255,177,116,.24),transparent 76%),linear-gradient(132deg,#fffaf5 0%,#fff0e3 55%,#ffe5d2 100%);
+  --so-panel:linear-gradient(144deg,#fffefa 0%,#fff0e2 56%,#ffdfc8 100%);
+  --so-panel-soft:linear-gradient(131deg,#fffdf8,#ffead7);
+  --so-button:linear-gradient(110deg,#ffd5a8 0%,#f7b079 55%,#e99565 100%);
+  --so-ink:#3d2a22;
+  --so-muted-ink:#705346;
+}
+html,body {color:var(--so-ink)!important;background:var(--so-dark-page)!important;}
+.bg-atmosphere {background:var(--so-dark-page)!important;color:var(--so-ink)!important;}
+body>header {background:linear-gradient(108deg,rgba(255,252,247,.98),rgba(255,234,218,.97),rgba(255,249,242,.98))!important;border-color:#e7bf9f!important;box-shadow:0 8px 25px rgba(130,74,43,.07)!important;}
+.glass {background:var(--so-panel)!important;color:var(--so-ink)!important;border-color:#e8c4a8!important;}
+/* All sidebar, overview, dashboard, product and billing cards. */
+:is(section,article,div,aside,details,form)[class*="rounded-"][class*="bg-[#"],
+:is(section,article,div,aside,details,form)[class*="rounded-2xl"][class*="bg-gradient"],
+:is(section,article,div,aside,details,form)[class*="rounded-3xl"][class*="bg-gradient"] {
+  background:var(--so-panel)!important;
+  color:var(--so-ink)!important;
+  border-color:#e8c2a3!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.93),0 12px 34px rgba(153,91,54,.08);
+}
+:is(section,article,div,aside,details,form)[class*="rounded-"][class*="bg-white/"],
+:is(section,article,div,aside,details,form)[class~="bg-white"] {background:var(--so-panel-soft)!important;color:var(--so-ink)!important;border-color:#ebc6a7!important;}
+:is(button,a)[class*="bg-violet-"],:is(button,a)[class*="bg-[#e8d9ff"],:is(button,a)[class*="bg-gradient-to"]:not([class*="rounded-3xl"]) {background:var(--so-button)!important;color:#3d2920!important;border-color:#e4ad88!important;}
+/* Positive typography: dark in a light workspace. */
+.text-white\/30,.text-white\/35,.text-white\/40,.text-white\/45,.text-white\/50,.text-white\/55,.text-white\/60,.text-white\/65,.text-white\/70,.text-white\/75,
+[class*="text-white/"] {color:#725648!important;}
+[class~="text-white"] {color:#3b2920!important;}
+[class*="text-violet-"],[class*="text-purple-"],[class*="text-fuchsia-"] {color:#935035!important;}
+:is(h1,h2,h3,h4,h5,p,span,li,a,label)[class*="text-[#fff"],
+:is(h1,h2,h3,h4,h5,p,span,li,a,label)[class*="text-[#ffe"],
+:is(h1,h2,h3,h4,h5,p,span,li,a,label)[class*="text-[#f1"],
+:is(h1,h2,h3,h4,h5,p,span,li,a,label)[class*="text-[#e3"] {color:#3b2922!important;}
+:is(h1,h2,h3,h4,p,span,li,a,label)[class*="text-[#ffc"],
+:is(h1,h2,h3,h4,p,span,li,a,label)[class*="text-[#ffd"],
+:is(h1,h2,h3,h4,p,span,li,a,label)[class*="text-[#ffb"] {color:#9b5435!important;}
+[class*="border-violet-"],[class*="border-purple-"],[class*="border-fuchsia-"] {border-color:#e6ba9a!important;}
+[class*="bg-violet-"],[class*="bg-purple-"],[class*="bg-fuchsia-"] {background-color:rgba(238,159,98,.17)!important;}
+[class*="hover:bg-violet-"]:hover {background-color:rgba(238,159,98,.21)!important;}
+:is(a,button)[class*="hover:text-white"]:hover {color:#843f28!important;}
+.muted {color:#705346!important;}
+/* Form surfaces: always dark text on cream, not ivory on cream. */
+.field,
+:is(input:not([type="checkbox"]):not([type="radio"]),select,textarea)[class*="bg-[#"] {
+  background:linear-gradient(130deg,#fffefa,#fff0e5)!important;
+  color:#392920!important;
+  border-color:#dfb999!important;
+  caret-color:#a75b38;
+}
+.field:focus,input:focus,select:focus,textarea:focus {border-color:#c67b51!important;box-shadow:0 0 0 3px rgba(233,158,105,.17);}
+input::placeholder,textarea::placeholder {color:#8f705e!important;opacity:1;}
+select option {background:#fff6eb;color:#392820;}
+.button {background:var(--so-button)!important;color:#37251f!important;box-shadow:0 7px 20px rgba(139,86,49,.12);}
+.button:hover:not(:disabled) {filter:brightness(.98);}
+.outline-button {background:linear-gradient(140deg,#fffdf8,#ffe8d5)!important;color:#65412e!important;border:1px solid #e3b896!important;}
+:is(button,a)[class*="bg-violet-200"],:is(button,a)[class*="bg-violet-100"],:is(button,a)[class*="bg-[#e8d9ff"] {background:var(--so-button)!important;color:#3b2920!important;}
+:is(button,a)[class*="text-[#170c26"] {color:#3b2920!important;}
+/* Preserve readable semantic success / errors. */
+[role="alert"] {color:#a32f35!important;}
+/* Printed quotations are still plain paper. */
+@media print { body,.bg-atmosphere,body>header {background:#fff!important;color:#111!important;} #solveoi-quote-print,#solveoi-quote-print * {background:#fff!important;color:#111!important;box-shadow:none!important;} }

@@ -1,110 +1,19 @@
-
 "use client";
 
-type GlobalErrorProps = {
-  error: Error & {
-    digest?: string;
-  };
-  reset: () => void;
-};
+type GlobalErrorProps = {error: Error & {digest?:string};reset:()=>void};
 
-export default function GlobalError({
-  error,
-  reset,
-}: GlobalErrorProps) {
-  return (
-    <html lang="en">
-      <body
-        style={{
-          margin: 0,
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background:
-            "radial-gradient(circle at 50% 30%, #241035, #090610 65%)",
-          color: "#f7f2ff",
-          fontFamily: "Arial, Helvetica, sans-serif",
-          padding: "24px",
-        }}
-      >
-        <main
-          style={{
-            width: "100%",
-            maxWidth: "480px",
-            padding: "40px",
-            textAlign: "center",
-            background: "rgba(23, 15, 37, 0.85)",
-            border: "1px solid rgba(196, 151, 255, 0.2)",
-            borderRadius: "24px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "28px",
-              fontWeight: 800,
-              marginBottom: "32px",
-            }}
-          >
-            Solve
-            <span style={{ color: "#c59cff" }}>
-              Oi
-            </span>
-          </div>
-
-          <h1
-            style={{
-              fontSize: "30px",
-              fontWeight: 700,
-              marginBottom: "16px",
-            }}
-          >
-            Something went wrong
-          </h1>
-
-          <p
-            style={{
-              fontSize: "15px",
-              color: "#b9abc9",
-              lineHeight: 1.7,
-              marginBottom: "28px",
-            }}
-          >
-            We encountered an unexpected problem.
-            Please try again.
-          </p>
-
-          <button
-            type="button"
-            onClick={() => reset()}
-            style={{
-              width: "100%",
-              padding: "14px 20px",
-              background: "#f0e5ff",
-              color: "#170c26",
-              border: "none",
-              borderRadius: "12px",
-              fontSize: "14px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
-            Try Again
-          </button>
-
-          {error.digest && (
-            <p
-              style={{
-                marginTop: "24px",
-                fontSize: "11px",
-                color: "#857595",
-              }}
-            >
-              Error reference: {error.digest}
-            </p>
-          )}
-        </main>
-      </body>
-    </html>
-  );
+export default function GlobalError({error,reset}:GlobalErrorProps) {
+ return (
+  <html lang="en">
+   <body style={{margin:0,minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"Arial, Helvetica, sans-serif",color:"#3c2a22",background:"radial-gradient(ellipse at 70% 0%,rgba(255,196,137,.24),transparent 70%),linear-gradient(135deg,#fffdfa,#fff0e3 48%,#ffe4ce)"}}>
+    <main style={{width:"100%",maxWidth:480,padding:40,textAlign:"center",border:"1px solid rgba(255,205,160,.35)",borderRadius:24,background:"linear-gradient(140deg,#fffefa,#ffeedf 50%,#ffdcc3)",boxShadow:"0 25px 65px rgba(139,80,44,.11)"}}>
+     <div style={{fontSize:28,fontWeight:800,marginBottom:32}}>Solve<span style={{color:"#a65b39"}}>Oi</span></div>
+     <h1 style={{fontSize:30,fontWeight:700,marginBottom:16,color:"#3c2a22"}}>Something went wrong</h1>
+     <p style={{fontSize:15,color:"#705548",lineHeight:1.7,marginBottom:28}}>We encountered an unexpected problem. Please try again.</p>
+     <button type="button" onClick={()=>reset()} style={{width:"100%",padding:"14px 20px",background:"linear-gradient(110deg,#ffe1b5,#ffc18d,#f6a36e)",color:"#3b261e",border:"1px solid rgba(255,214,176,.65)",borderRadius:12,fontSize:14,fontWeight:700,cursor:"pointer"}}>Try Again</button>
+     {error.digest && <p style={{marginTop:24,fontSize:11,color:"#896c5b"}}>Error reference: {error.digest}</p>}
+    </main>
+   </body>
+  </html>
+ );
 }

@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  Check,
   CheckCircle2,
   ChevronRight,
   FileText,
@@ -16,52 +15,63 @@ import Container from "@/components/layout/Container";
 import Hero from "@/components/home/Hero";
 import ProductShowcase from "@/components/home/ProductShowcase";
 
-
 const steps = [
   {
     number: "01",
     title: "Choose a solution",
-    text: "Find an AI product designed for the exact business problem you want to simplify.",
+    description:
+      "Find an AI product designed for the business problem you want to simplify.",
   },
   {
     number: "02",
     title: "Configure your workflow",
-    text: "Provide approved business information, preferences and documents.",
+    description:
+      "Provide approved business information, preferences, and documents.",
   },
   {
     number: "03",
-    title: "Generate a result",
-    text: "Let the AI help prepare a useful output from the information you've supplied.",
+    title: "Prepare a result",
+    description:
+      "Let the tool help prepare useful work from the information you provide.",
   },
   {
     number: "04",
     title: "Review and proceed",
-    text: "Check important details and approve consequential actions before they happen.",
+    description:
+      "Check important details and approve actions before they happen.",
   },
 ];
 
 const industries = [
   {
+    number: "01",
     title: "Retail & E-commerce",
-    text: "Customer support and repetitive information requests.",
+    description:
+      "Customer support and repetitive information requests.",
     product: "Respond",
     href: "/solutions/respond",
   },
   {
+    number: "02",
     title: "Agencies & Services",
-    text: "Quotations, sales conversations and client follow-ups.",
+    description:
+      "Quotations, sales conversations, and client follow-ups.",
     product: "Quote + Follow",
     href: "/solutions/quote",
   },
   {
+    number: "03",
     title: "Finance & Operations",
-    text: "Document processing and invoice follow-ups.",
+    description:
+      "Document processing and invoice follow-ups.",
     product: "Extract + Collect",
     href: "/solutions/extract",
   },
   {
+    number: "04",
     title: "Growing Teams",
-    text: "Employee questions and approved HR policies.",
+    description:
+      "Employee questions and approved HR policies.",
     product: "HR Desk",
     href: "/solutions/hr-desk",
   },
@@ -70,15 +80,21 @@ const industries = [
 const pricing = [
   {
     name: "Basic",
-    text: "For individuals getting started with focused AI assistance.",
+    description:
+      "For individuals getting started with focused AI assistance.",
+    featured: false,
   },
   {
     name: "Growth",
-    text: "For businesses needing more frequent workflow support.",
+    description:
+      "For businesses that need more frequent workflow support.",
+    featured: true,
   },
   {
     name: "Premium",
-    text: "For higher-volume AI usage and additional conveniences.",
+    description:
+      "For higher-volume usage and additional conveniences.",
+    featured: false,
   },
 ];
 
@@ -86,56 +102,49 @@ const faqs = [
   {
     question: "What exactly is SolveOi?",
     answer:
-      "SolveOi is a planned AI SaaS platform offering six focused tools for everyday business tasks: Quote, Extract, Collect, Follow, Respond and HR Desk.",
+      "SolveOi is an AI SaaS platform being developed around six business tools: Quote, Extract, Collect, Follow, Respond, and HR Desk.",
   },
   {
     question: "Are the AI tools available now?",
     answer:
-      "The six initial products are currently in development. Availability will be announced when each tool has completed testing and release approval.",
+      "The initial products are undergoing development and testing. Public availability will be announced after release approval.",
   },
   {
-    question: "Will I have to purchase every product?",
+    question: "Do I need to purchase every product?",
     answer:
-      "No. SolveOi's proposed subscription model allows customers to choose individual products based on their needs.",
+      "The planned subscription model will allow customers to choose individual products based on their business needs.",
   },
   {
-    question: "Will the AI perform tasks automatically?",
+    question: "Will AI perform tasks automatically?",
     answer:
-      "Some workflows will assist with preparation and processing, while consequential actions will require appropriate validation and human approval.",
+      "Some workflows will assist with preparation and processing. Important actions will require appropriate validation and human approval.",
   },
 ];
 
 export default function HomePage() {
   return (
-    <main className="bg-[#08060E] text-white">
-      {/* 1 — Cinematic landing hero */}
+    <main className="min-h-screen bg-[#FFF8EE] text-[#332116]">
+      {/* HERO */}
       <Hero />
 
-      {/* 2 — Six AI products */}
+      {/* PRODUCT ECOSYSTEM */}
       <ProductShowcase />
 
-      {/* 3 — Giant brand statement */}
-      <section className="relative isolate overflow-hidden border-t border-white/[0.06] bg-[#0C0715] py-28 sm:py-36">
+      {/* OUR PHILOSOPHY */}
+      <section className="relative overflow-hidden border-t border-[#DFBD9B] bg-gradient-to-b from-[#F0D8BE] via-[#F8E8D5] to-[#FFF8EE] py-24 sm:py-32">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-18 -translate-x-1/2 select-none whitespace-nowrap text-[clamp(6rem,17vw,17rem)] font-bold tracking-[-0.09em] text-violet-200/[0.045]"
-        >
-          INTELLIGENCE
-        </div>
-
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-1/3 h-[460px] w-[680px] -translate-x-1/2 rounded-full bg-violet-700/20 blur-[150px]"
+          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#E5A15A]/15 blur-[120px]"
         />
 
         <Container className="relative">
-          <div className="mx-auto max-w-4xl pt-12 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/25 bg-violet-400/10 px-4 py-2 text-xs text-violet-200">
+          <div className="mx-auto max-w-4xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#D8A477] bg-[#FFF7EC] px-4 py-2 text-xs font-semibold text-[#99431A]">
               <Sparkles size={14} />
-              Our philosophy
+              Our Philosophy
             </span>
 
-            <h2 className="mt-8 text-5xl leading-[1.08] font-semibold tracking-[-0.06em] sm:text-7xl">
+            <h2 className="mt-8 text-4xl font-semibold leading-[1.1] tracking-[-0.06em] text-[#332116] sm:text-6xl lg:text-7xl">
               The future of work
               <br />
               <span className="solveoi-gradient-text">
@@ -143,30 +152,45 @@ export default function HomePage() {
               </span>
             </h2>
 
-            <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-white/45 sm:text-lg">
-              Growing businesses deserve useful, intelligent tools
-              without the complexity of large enterprise systems.
-              SolveOi focuses on making practical workflows simpler.
+            <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-[#765740] sm:text-lg">
+              Growing businesses deserve intelligent tools
+              without the complexity of large enterprise
+              systems. SolveOi focuses on practical
+              solutions that make everyday work simpler.
             </p>
 
-            <div className="relative mx-auto mt-16 grid max-w-4xl gap-4 md:grid-cols-3">
+            <div className="mt-14 grid gap-4 md:grid-cols-3">
               {[
-                ["01", "Focused solutions", "Solve a specific business problem."],
-                ["02", "Connected experience", "One planned workspace for multiple products."],
-                ["03", "Human control", "Review important results and actions."],
-              ].map(([number, title, text]) => (
+                {
+                  number: "01",
+                  title: "Focused Solutions",
+                  text: "Solve specific business challenges.",
+                },
+                {
+                  number: "02",
+                  title: "Connected Experience",
+                  text: "One workspace for multiple products.",
+                },
+                {
+                  number: "03",
+                  title: "Human Control",
+                  text: "Review important results and actions.",
+                },
+              ].map((item) => (
                 <div
-                  key={number}
-                  className="rounded-2xl border border-violet-300/[0.12] bg-[#1B122A]/60 p-7 text-left backdrop-blur-md"
+                  key={item.number}
+                  className="rounded-2xl border border-[#DEB68F] bg-[#FFF9F1] p-7 text-left shadow-[0_14px_36px_rgba(105,56,20,.07)]"
                 >
-                  <p className="text-xs font-medium text-violet-300">
-                    {number}
+                  <p className="text-xs font-bold text-[#B2541E]">
+                    {item.number}
                   </p>
 
-                  <h3 className="mt-8 text-lg font-semibold">{title}</h3>
+                  <h3 className="mt-8 text-lg font-semibold text-[#332116]">
+                    {item.title}
+                  </h3>
 
-                  <p className="mt-3 text-sm leading-7 text-white/40">
-                    {text}
+                  <p className="mt-3 text-sm leading-7 text-[#80614B]">
+                    {item.text}
                   </p>
                 </div>
               ))}
@@ -175,28 +199,28 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 4 — How it works */}
-      <section className="relative overflow-hidden bg-[#09060F] py-24 lg:py-32">
+      {/* HOW SOLVEOI WORKS */}
+      <section className="bg-[#FFF8EE] py-24 lg:py-32">
         <Container>
-          <div className="mb-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div className="mb-14 grid gap-8 lg:grid-cols-2 lg:items-end">
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-violet-300">
-                Simple by design
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A74B1D]">
+                Simple by Design
               </p>
 
-              <h2 className="mt-5 text-4xl leading-[1.1] font-semibold tracking-[-0.055em] sm:text-6xl">
+              <h2 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-[-0.055em] text-[#332116] sm:text-6xl">
                 Less busywork.
                 <br />
-                <span className="text-white/35">
+                <span className="solveoi-gradient-text">
                   More progress.
                 </span>
               </h2>
             </div>
 
-            <p className="max-w-lg text-base leading-8 text-white/45">
-              Our planned products share a clear philosophy:
-              give the AI the right context, prepare useful work,
-              and let people review the important decisions.
+            <p className="max-w-lg text-base leading-8 text-[#75543E]">
+              Give the tools the right context, prepare
+              useful work, and keep people responsible
+              for important decisions.
             </p>
           </div>
 
@@ -204,27 +228,22 @@ export default function HomePage() {
             {steps.map((step) => (
               <div
                 key={step.number}
-                className="relative overflow-hidden rounded-[24px] border border-white/[0.09] bg-[#15101F] p-7"
+                className="group rounded-[24px] border border-[#E0BE9C] bg-gradient-to-br from-white to-[#F5E2CC] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(111,57,24,.12)]"
               >
-                <div
-                  aria-hidden="true"
-                  className="absolute right-0 top-0 h-28 w-28 rounded-full bg-violet-500/10 blur-[50px]"
-                />
-
-                <span className="text-xs font-medium text-violet-300">
+                <span className="text-xs font-bold text-[#AD501E]">
                   {step.number} /
                 </span>
 
-                <div className="mt-12 flex h-11 w-11 items-center justify-center rounded-xl border border-violet-400/20 bg-violet-500/10 text-violet-200">
-                  <Workflow size={21} />
+                <div className="mt-12 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E9B17B] text-[#873714]">
+                  <Workflow size={22} />
                 </div>
 
-                <h3 className="mt-6 text-xl font-semibold">
+                <h3 className="mt-6 text-xl font-semibold text-[#332116]">
                   {step.title}
                 </h3>
 
-                <p className="mt-4 text-sm leading-7 text-white/45">
-                  {step.text}
+                <p className="mt-4 text-sm leading-7 text-[#795B45]">
+                  {step.description}
                 </p>
               </div>
             ))}
@@ -232,98 +251,113 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 5 — Workflow showcase */}
-      <section className="solveoi-ambient relative overflow-hidden py-24 lg:py-32">
+      {/* WORKFLOW PREVIEW */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#F0D9BF] via-[#F6E6D3] to-[#F8EFE3] py-24 lg:py-32">
         <Container>
           <div className="mb-12 max-w-3xl">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-violet-300">
-              Designed for real workflows
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A64B1D]">
+              Designed for Real Workflows
             </p>
 
-            <h2 className="mt-5 text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
+            <h2 className="mt-5 text-4xl font-semibold tracking-[-0.055em] text-[#332116] sm:text-6xl">
               See intelligence
               <br />
-              <span className="text-white/40">
+              <span className="solveoi-gradient-text">
                 take shape.
               </span>
             </h2>
 
-            <p className="mt-6 text-base leading-8 text-white/50">
-              A conceptual example of how SolveOi Quote could turn
-              a customer request into a reviewed quotation.
+            <p className="mt-6 text-base leading-8 text-[#785842]">
+              An illustrative example of how SolveOi Quote
+              can help prepare a customer quotation for review.
             </p>
           </div>
 
-          <div className="grid gap-4 rounded-[28px] border border-violet-400/[0.16] bg-[#120C1C]/85 p-4 shadow-[0_35px_100px_rgba(70,20,120,0.2)] lg:grid-cols-[1fr_80px_1fr] lg:items-center lg:p-8">
-            {/* Input panel */}
-            <div className="rounded-2xl border border-white/10 bg-[#181221] p-6">
-              <div className="flex items-center gap-2 border-b border-white/10 pb-4">
-                <FileText size={18} className="text-violet-300" />
-                <span className="text-sm font-semibold">
+          <div className="grid gap-5 rounded-[30px] border border-[#D6A77D] bg-[#F0D8BF] p-5 shadow-[0_24px_65px_rgba(108,56,23,.1)] lg:grid-cols-[1fr_64px_1fr] lg:items-center lg:p-8">
+            {/* INPUT */}
+            <div className="rounded-2xl border border-[#E4C3A2] bg-[#FFFAF3] p-6">
+              <div className="flex items-center gap-3 border-b border-[#EAD2B8] pb-4">
+                <FileText
+                  size={19}
+                  className="text-[#A64B1D]"
+                />
+
+                <h3 className="text-sm font-semibold text-[#332116]">
                   Customer Request
-                </span>
+                </h3>
               </div>
 
-              <p className="mt-6 text-sm leading-8 text-white/70">
-                &ldquo;We need a quotation for six office chairs
-                and two work desks for our new office.&rdquo;
+              <p className="mt-6 text-sm leading-8 text-[#684B36]">
+                &ldquo;We need a quotation for six office
+                chairs and two work desks for our
+                new office.&rdquo;
               </p>
 
-              <div className="mt-10 flex gap-2">
-                <span className="rounded-full bg-violet-400/10 px-3 py-1 text-xs text-violet-200">
-                  Unstructured request
-                </span>
-              </div>
+              <span className="mt-8 inline-flex rounded-full bg-[#F4DEC4] px-3 py-1.5 text-xs font-medium text-[#9C4D20]">
+                Unstructured request
+              </span>
             </div>
 
+            {/* DIRECTION */}
             <div className="flex justify-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-violet-400/25 bg-violet-500/15 text-violet-200 shadow-[0_0_40px_rgba(158,80,255,0.18)]">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#BF581F] to-[#EB9A42] text-white shadow-[0_10px_28px_rgba(157,75,25,.2)]">
                 <ArrowRight size={23} />
               </div>
             </div>
 
-            {/* Output panel */}
-            <div className="rounded-2xl border border-white/10 bg-[#181221] p-6">
-              <div className="flex items-center gap-2 border-b border-white/10 pb-4">
-                <CheckCircle2 size={18} className="text-violet-300" />
-                <span className="text-sm font-semibold">
+            {/* OUTPUT */}
+            <div className="rounded-2xl border border-[#E4C3A2] bg-[#FFFAF3] p-6">
+              <div className="flex items-center gap-3 border-b border-[#EAD2B8] pb-4">
+                <CheckCircle2
+                  size={19}
+                  className="text-[#A64B1D]"
+                />
+
+                <h3 className="text-sm font-semibold text-[#332116]">
                   Reviewed Quotation
-                </span>
+                </h3>
               </div>
 
-              <div className="mt-6 space-y-3">
+              <div className="mt-6 space-y-4">
                 <div className="flex justify-between gap-4 text-sm">
-                  <span className="text-white/55">Office chairs</span>
-                  <span className="text-white">6 units</span>
+                  <span className="text-[#765844]">
+                    Office chairs
+                  </span>
+                  <span className="font-semibold text-[#332116]">
+                    6 units
+                  </span>
                 </div>
 
                 <div className="flex justify-between gap-4 text-sm">
-                  <span className="text-white/55">Work desks</span>
-                  <span className="text-white">2 units</span>
+                  <span className="text-[#765844]">
+                    Work desks
+                  </span>
+                  <span className="font-semibold text-[#332116]">
+                    2 units
+                  </span>
                 </div>
 
-                <div className="my-4 border-t border-white/10" />
-
-                <p className="text-xs text-white/40">
-                  Prices verified against the approved catalog
+                <p className="border-t border-[#E8D1B7] pt-4 text-xs leading-6 text-[#84664F]">
+                  Prices require validation against an
+                  approved business catalog.
                 </p>
               </div>
 
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-violet-400/10 px-3 py-1.5 text-xs text-violet-200">
-                <Check size={13} />
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#F8E2C9] px-3 py-1.5 text-xs font-semibold text-[#9E471A]">
+                <CheckCircle2 size={14} />
                 Human review before export
               </div>
             </div>
           </div>
 
-          <p className="mt-5 text-center text-xs text-white/30">
-            Illustrative design preview — not a functioning quotation generator yet.
+          <p className="mt-5 text-center text-xs text-[#866A52]">
+            Illustrative workflow preview.
           </p>
 
           <div className="mt-8 text-center">
             <Link
               href="/solutions/quote"
-              className="inline-flex items-center gap-2 text-sm font-medium text-violet-200 hover:text-white"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#A4491A] transition hover:text-[#D86F29]"
             >
               Explore SolveOi Quote
               <ArrowUpRight size={17} />
@@ -332,59 +366,62 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 6 — Industries */}
-      <section className="bg-[#09060F] py-24 lg:py-32">
+      {/* INDUSTRIES */}
+      <section className="bg-[#FFF9F1] py-24 lg:py-32">
         <Container>
           <div className="mb-12 flex flex-col justify-between gap-7 md:flex-row md:items-end">
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-violet-300">
-                Built for growing teams
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A94B1B]">
+                Built for Growing Teams
               </p>
 
-              <h2 className="mt-5 text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
+              <h2 className="mt-5 text-4xl font-semibold tracking-[-0.05em] text-[#332116] sm:text-6xl">
                 Intelligence for
                 <br />
-                every kind of work.
+                <span className="solveoi-gradient-text">
+                  every kind of work.
+                </span>
               </h2>
             </div>
 
             <Link
               href="/industries"
-              className="inline-flex w-fit items-center gap-2 text-sm font-medium text-violet-200"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#A84B1B]"
             >
-              Explore industries <ArrowUpRight size={17} />
+              Explore industries
+              <ArrowUpRight size={17} />
             </Link>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {industries.map((item, index) => (
+            {industries.map((industry) => (
               <Link
-                key={item.title}
-                href={item.href}
-                className="group flex min-h-[220px] flex-col justify-between rounded-[24px] border border-white/[0.085] bg-[#15101E] p-7 transition duration-300 hover:-translate-y-1 hover:border-violet-400/30"
+                key={industry.title}
+                href={industry.href}
+                className="group flex min-h-[220px] flex-col justify-between rounded-[24px] border border-[#E1BE9B] bg-gradient-to-br from-white to-[#F4E2CC] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(107,55,23,.12)]"
               >
                 <div className="flex items-start justify-between">
-                  <span className="text-xs font-semibold text-violet-300/70">
-                    0{index + 1}
+                  <span className="text-xs font-bold text-[#AE521E]">
+                    {industry.number}
                   </span>
 
                   <ArrowUpRight
                     size={20}
-                    className="text-white/30 transition group-hover:text-violet-200"
+                    className="text-[#B26C3A] transition group-hover:text-[#9D4118]"
                   />
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold tracking-tight">
-                    {item.title}
+                  <h3 className="text-2xl font-semibold text-[#332116]">
+                    {industry.title}
                   </h3>
 
-                  <p className="mt-3 text-sm leading-7 text-white/45">
-                    {item.text}
+                  <p className="mt-3 text-sm leading-7 text-[#765640]">
+                    {industry.description}
                   </p>
 
-                  <p className="mt-5 text-xs font-medium text-violet-300">
-                    {item.product}
+                  <p className="mt-5 text-xs font-bold text-[#A64B1D]">
+                    {industry.product}
                   </p>
                 </div>
               </Link>
@@ -393,57 +430,65 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 7 — Pricing preview */}
-      <section className="solveoi-ambient border-y border-white/[0.06] py-24 lg:py-32">
+      {/* PRICING */}
+      <section className="border-y border-[#E0BE9D] bg-[#F0DDC6] py-24 lg:py-32">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-violet-300">
-              Flexible plans
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A5491B]">
+              Flexible Plans
             </p>
 
-            <h2 className="mt-5 text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">
+            <h2 className="mt-5 text-4xl font-semibold tracking-[-0.05em] text-[#332116] sm:text-6xl">
               Start where you are.
               <br />
-              <span className="text-white/40">Scale as you grow.</span>
+              <span className="solveoi-gradient-text">
+                Scale as you grow.
+              </span>
             </h2>
 
-            <p className="mt-6 leading-8 text-white/50">
-              Our proposed subscription model lets businesses choose
-              individual AI tools with appropriate usage allowances.
+            <p className="mt-6 leading-8 text-[#75533E]">
+              Our proposed subscription model lets
+              businesses choose individual tools with
+              suitable usage allowances.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {pricing.map((plan, index) => (
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {pricing.map((plan) => (
               <div
                 key={plan.name}
                 className={`rounded-[26px] border p-8 ${
-                  index === 1
-                    ? "border-violet-400/35 bg-violet-500/[0.09] shadow-[0_0_65px_rgba(126,55,209,0.12)]"
-                    : "border-white/[0.09] bg-[#15101F]"
+                  plan.featured
+                    ? "border-[#C67C43] bg-[#FFF2E1] shadow-[0_20px_55px_rgba(143,64,19,.13)]"
+                    : "border-[#DFBE9D] bg-[#FFFAF3]"
                 }`}
               >
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-2xl font-semibold">{plan.name}</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-semibold text-[#332116]">
+                    {plan.name}
+                  </h3>
 
-                  {index === 1 && (
-                    <Sparkles size={20} className="text-violet-300" />
+                  {plan.featured && (
+                    <Sparkles
+                      size={20}
+                      className="text-[#B6531C]"
+                    />
                   )}
                 </div>
 
-                <p className="mt-5 min-h-20 text-sm leading-7 text-white/45">
-                  {plan.text}
+                <p className="mt-5 min-h-20 text-sm leading-7 text-[#765640]">
+                  {plan.description}
                 </p>
 
-                <div className="my-8 border-t border-white/10" />
+                <div className="my-8 border-t border-[#E4C7A9]" />
 
-                <p className="text-xs text-violet-200">
+                <p className="text-xs font-semibold text-[#A04D20]">
                   Pricing to be confirmed
                 </p>
 
                 <Link
                   href="/pricing"
-                  className="mt-8 flex items-center justify-between rounded-xl border border-white/15 px-5 py-3 text-sm font-medium transition hover:bg-white/[0.06]"
+                  className="mt-8 flex items-center justify-between rounded-xl border border-[#D8AB85] bg-white px-5 py-3 text-sm font-semibold text-[#8F431B] transition hover:bg-[#F9E4CB]"
                 >
                   Explore plan
                   <ChevronRight size={16} />
@@ -454,16 +499,16 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 8 — FAQ */}
-      <section className="bg-[#09060F] py-24 lg:py-32">
+      {/* FAQ */}
+      <section className="bg-[#FFF8EE] py-24 lg:py-32">
         <Container>
           <div className="mx-auto max-w-3xl">
             <div className="text-center">
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-violet-300">
-                FAQs
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#A64B1D]">
+                Frequently Asked Questions
               </p>
 
-              <h2 className="mt-5 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">
+              <h2 className="mt-5 text-4xl font-semibold tracking-[-0.05em] text-[#332116] sm:text-5xl">
                 A little more clarity.
               </h2>
             </div>
@@ -472,13 +517,13 @@ export default function HomePage() {
               {faqs.map((item) => (
                 <details
                   key={item.question}
-                  className="rounded-2xl border border-white/[0.09] bg-[#15101F] p-6"
+                  className="group rounded-2xl border border-[#E0C09F] bg-[#FFFDF8] p-6 shadow-[0_8px_28px_rgba(100,50,22,.04)]"
                 >
-                  <summary className="cursor-pointer font-medium text-white/85">
+                  <summary className="cursor-pointer font-semibold text-[#3E291B]">
                     {item.question}
                   </summary>
 
-                  <p className="mt-4 text-sm leading-8 text-white/45">
+                  <p className="mt-4 text-sm leading-8 text-[#765640]">
                     {item.answer}
                   </p>
                 </details>
@@ -488,44 +533,48 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 9 — Final cinematic call to action */}
-      <section className="relative overflow-hidden border-t border-white/[0.07] bg-[#10091C] py-24 lg:py-32">
-        <div className="pointer-events-none absolute left-1/2 top-[-300px] h-[650px] w-[900px] -translate-x-1/2 rounded-full bg-violet-600/25 blur-[140px]" />
+      {/* FINAL CALL TO ACTION */}
+      <section className="relative overflow-hidden border-t border-[#A96435] bg-gradient-to-br from-[#7D3B1E] via-[#A14D20] to-[#BC682C] py-24 text-[#FFF1DC] lg:py-32">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-[-300px] h-[650px] w-[900px] -translate-x-1/2 rounded-full bg-[#F5AD56]/15 blur-[140px]"
+        />
 
         <Container className="relative text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-400/10 px-4 py-2 text-xs text-violet-200">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#FFCE95]/35 bg-[#F7BA73]/15 px-4 py-2 text-xs font-semibold text-[#FFD5A2]">
             <Layers3 size={15} />
             Intelligence That Solves
           </span>
 
-          <h2 className="mx-auto mt-8 max-w-5xl text-5xl leading-[1.06] font-semibold tracking-[-0.06em] sm:text-7xl">
+          <h2 className="mx-auto mt-8 max-w-5xl text-5xl font-semibold leading-[1.08] tracking-[-0.06em] text-[#FFF1DC] sm:text-7xl">
             Your next chapter
             <br />
-            <span className="solveoi-gradient-text">
+            <span className="text-[#FFD29B]">
               starts with a solution.
             </span>
           </h2>
 
-          
-<p className="mx-auto mt-7 max-w-xl text-base leading-8 text-white/50">
-  Explore the SolveOi AI product roadmap and discover
-  how intelligent workflows could help your business.
-</p>
-
+          <p className="mx-auto mt-7 max-w-xl text-base leading-8 text-[#F4DDC4]">
+            Explore the SolveOi product roadmap and
+            discover how intelligent workflows could
+            help your business.
+          </p>
 
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Link
               href="/solutions"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-semibold text-[#130B1E] hover:bg-violet-100"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#FFF5E6] px-7 py-3.5 text-sm font-bold text-[#743417] transition hover:bg-white"
             >
-              Explore Solutions <ArrowRight size={17} />
+              Explore Solutions
+              <ArrowRight size={17} />
             </Link>
 
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.05] px-7 py-3.5 text-sm font-medium text-white/85 hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#F7C18A]/50 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/20"
             >
-              Contact Us <ArrowUpRight size={17} />
+              Contact Us
+              <ArrowUpRight size={17} />
             </Link>
           </div>
         </Container>
