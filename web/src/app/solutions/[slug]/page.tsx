@@ -18,7 +18,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export const dynamicParams = false;
+
 
 // Generate all six product routes
 export function generateStaticParams() {

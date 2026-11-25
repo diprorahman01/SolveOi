@@ -2,8 +2,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { products } from "@/lib/products";
 
-export const runtime = "nodejs";
-
 type Inquiry = {
   type: string;
   name: string;
@@ -17,18 +15,25 @@ type Inquiry = {
 };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const validProducts = new Set(products.map((item) => item.slug));
+
+const validProducts = new Set(
+  products.map((item) => item.slug)
+);
 
 function field(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
 }
 
 function error(message: string, status: number) {
-  return NextResponse.json({ message }, { status });
+  return NextResponse.json(
+    { message },
+    { status }
+  );
 }
 
 export async function POST(request: NextRequest) {
   try {
+    // Validate request origin
     const origin = request.headers.get("origin");
 
     if (origin) {
@@ -41,21 +46,29 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Require JSON requests
     if (
-      !request.headers.get("content-type")?.includes("application/json")
+      !request.headers
+        .get("content-type")
+        ?.includes("application/json")
     ) {
       return error("Expected JSON request.", 415);
     }
 
     const raw = await request.text();
 
+    // Prevent oversized submissions
     if (raw.length > 12000) {
       return error("Request is too large.", 413);
     }
 
     const body: unknown = JSON.parse(raw);
 
-    if (!body || typeof body !== "object" || Array.isArray(body)) {
+    if (
+      !body ||
+      typeof body !== "object" ||
+      Array.isArray(body)
+    ) {
       return error("Invalid form submission.", 400);
     }
 
@@ -73,15 +86,19 @@ export async function POST(request: NextRequest) {
       consent: values.consent === true,
     };
 
-    // Silently ignore basic honeypot spam.
+    // Silently ignore basic honeypot spam
     if (inquiry.website) {
-      return NextResponse.json({ message: "Inquiry received." });
+      return NextResponse.json({
+        message: "Inquiry received.",
+      });
     }
 
+    // Validate inquiry type
     if (!["contact", "demo"].includes(inquiry.type)) {
       return error("Invalid inquiry type.", 400);
     }
 
+    // Validate submitted fields
     if (
       inquiry.name.length < 2 ||
       inquiry.name.length > 100 ||
@@ -90,21 +107,35 @@ export async function POST(request: NextRequest) {
       inquiry.company.length > 150 ||
       inquiry.message.length < 10 ||
       inquiry.message.length > 4000 ||
-      (inquiry.product !== "" && !validProducts.has(inquiry.product)) ||
+      (inquiry.product !== "" &&
+        !validProducts.has(inquiry.product)) ||
       !inquiry.consent
     ) {
-      return error("Please check the form fields and try again.", 400);
+      return error(
+        "Please check the form fields and try again.",
+        400
+      );
     }
 
+    // Cloudflare Turnstile verification
     const secret = process.env.TURNSTILE_SECRET_KEY;
 
-    if (process.env.NODE_ENV === "production" && !secret) {
-      return error("Form verification is not configured.", 503);
+    if (
+      process.env.NODE_ENV === "production" &&
+      !secret
+    ) {
+      return error(
+        "Form verification is not configured.",
+        503
+      );
     }
 
     if (secret) {
       if (!inquiry.token) {
-        return error("Please complete the verification challenge.", 400);
+        return error(
+          "Please complete the verification challenge.",
+          400
+        );
       }
 
       const verification = await fetch(
@@ -112,7 +143,8 @@ export async function POST(request: NextRequest) {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type":
+              "application/x-www-form-urlencoded",
           },
           body: new URLSearchParams({
             secret,
@@ -124,30 +156,42 @@ export async function POST(request: NextRequest) {
       );
 
       if (!verification.ok) {
-        return error("Unable to verify the request.", 502);
+        return error(
+          "Unable to verify the request.",
+          502
+        );
       }
 
       const verified: { success?: boolean } =
         await verification.json();
 
       if (!verified.success) {
-        return error("Verification failed. Please try again.", 400);
+        return error(
+          "Verification failed. Please try again.",
+          400
+        );
       }
     }
 
+    // Resend email configuration
     const apiKey = process.env.RESEND_API_KEY;
     const to = process.env.FORMS_TO_EMAIL;
     const from = process.env.FORMS_FROM_EMAIL;
 
     if (!apiKey || !to || !from) {
-      return error("Email delivery is not configured yet.", 503);
+      return error(
+        "Email delivery is not configured yet.",
+        503
+      );
     }
 
+    // Email subject
     const subject =
       inquiry.type === "demo"
         ? "SolveOi — New demo request"
         : "SolveOi — New contact inquiry";
 
+    // Email body
     const emailText = [
       `Inquiry type: ${inquiry.type}`,
       `Name: ${inquiry.name}`,
@@ -159,25 +203,33 @@ export async function POST(request: NextRequest) {
       inquiry.message,
     ].join("\n");
 
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: inquiry.email,
-        subject,
-        text: emailText,
-      }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(15000),
-    });
+    // Send email using Resend
+    const response = await fetch(
+      "https://api.resend.com/emails",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from,
+          to: [to],
+          reply_to: inquiry.email,
+          subject,
+          text: emailText,
+        }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(15000),
+      }
+    );
 
     if (!response.ok) {
-      console.error("SolveOi inquiry email provider error:", response.status);
+      console.error(
+        "SolveOi inquiry email provider error:",
+        response.status
+      );
+
       return error(
         "We could not submit your inquiry. Please try again later.",
         502
@@ -190,7 +242,9 @@ export async function POST(request: NextRequest) {
   } catch (exception) {
     console.error(
       "SolveOi inquiry processing failed:",
-      exception instanceof Error ? exception.message : "Unknown error"
+      exception instanceof Error
+        ? exception.message
+        : "Unknown error"
     );
 
     return error(
