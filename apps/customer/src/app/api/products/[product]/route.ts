@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { workspaceApi, mutationOriginAllowed, badRequest, readJson, safeObject } from "@/lib/m5-access";
 import { isWorkflowProduct, workflows, normalizeWorkflow, productAccess, draftFromApprovedSources } from "@/lib/product-workflows";
 import { logAudit } from "@/lib/m5-data";
+import type { Filter } from "mongodb";
+import type { WorkflowRecord } from "@/lib/product-workflows";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,10 +24,24 @@ export async function GET(_request: Request, { params }: Params) {
   if (!access.ok) return access.response;
   const { product, ctx } = access;
   const owner = ctx.role === "owner";
-  const scope = owner ? { organizationId: ctx.organizationId, productId: product } : {
-    organizationId: ctx.organizationId, productId: product,
-    $or: [ { createdBy: ctx.userId }, { kind: { $in: ["article", "policy"] }, status: "approved" } ],
-  };
+  
+const scope: Filter<WorkflowRecord> = owner
+  ? {
+      organizationId: ctx.organizationId,
+      productId: product,
+    }
+  : {
+      organizationId: ctx.organizationId,
+      productId: product,
+      $or: [
+        { createdBy: ctx.userId },
+        {
+          kind: { $in: ["article", "policy"] },
+          status: "approved",
+        },
+      ],
+    };
+
   const records = await workflows().find(scope).sort({ createdAt: -1 }).limit(100).toArray();
   return NextResponse.json({ records: records.map(x => ({ ...x, _id: String(x._id) })), role: ctx.role }, { headers: { "Cache-Control": "no-store" } });
 }
