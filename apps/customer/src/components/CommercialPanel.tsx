@@ -13,7 +13,30 @@ export default function CommercialPanel() {
     if (!response.ok) throw new Error(json.error || "Failed to load billing");
     setData(json);
   }
-  useEffect(() => { void load().catch(e => setError(e instanceof Error ? e.message : "Failed to load")); }, []);
+  useEffect(() => {
+    let active = true;
+
+    fetch("/api/commercial", { cache: "no-store" })
+      .then(async (response) => {
+        const json = (await response.json()) as Billing & { error?: string };
+        if (!response.ok) {
+          throw new Error(json.error || "Failed to load billing");
+        }
+        return json;
+      })
+      .then((json) => {
+        if (active) setData(json);
+      })
+      .catch((err: unknown) => {
+        if (active) {
+          setError(err instanceof Error ? err.message : "Failed to load");
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
   async function submit() {
     setLoading(true); setError(""); setInfo("");
     try {
