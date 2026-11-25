@@ -1,13 +1,97 @@
+
 import { ImageResponse } from "next/og";
-export const size = {width:1200,height:630};
+
+
+export const alt = "SolveOi — Carry less. Grow more.";
+
+export const size = {
+  width: 1200,
+  height: 630,
+};
+
 export const contentType = "image/png";
-export const alt = "SolveOi — Intelligence That Solves";
+
 export default function OpenGraphImage() {
   return new ImageResponse(
-    <div style={{width:"100%",height:"100%",display:"flex",flexDirection:"column",justifyContent:"center",padding:85,background:"linear-gradient(130deg,#fffcf4 5%,#ffe7d2 50%,#ffc99f 100%)",color:"#3d2921"}}>
-      <div style={{fontSize:42,fontWeight:700}}>Solve<span style={{color:"#ac5835"}}>Oi</span></div>
-      <div style={{marginTop:65,maxWidth:900,fontSize:70,fontWeight:700,letterSpacing:-3,lineHeight:1.1}}>Real problems.<br/>Intelligent solutions.</div>
-      <div style={{marginTop:35,fontSize:25,color:"#725143"}}>Practical AI tools for everyday business work.</div>
-    </div>,size
+    (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+          padding: 90,
+          background:
+            "linear-gradient(130deg, #fffcf4 0%, #ffe9d6 55%, #ffc99f 100%)",
+          color: "#422b23",
+          fontFamily: "Arial, sans-serif",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            fontSize: 72,
+            fontWeight: 800,
+            letterSpacing: -3,
+          }}
+        >
+          <span style={{ color: "#422b23" }}>Solve</span>
+          <span style={{ color: "#c66b3e" }}>Oi</span>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: 60,
+            fontSize: 65,
+            fontWeight: 800,
+            letterSpacing: -2,
+            lineHeight: 1.12,
+          }}
+        >
+          <div style={{ display: "flex" }}>
+            Real problems.
+          </div>
+          <div
+            style={{
+              display: "flex",
+              color: "#c66b3e",
+            }}
+          >
+            Intelligent solutions.
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            marginTop: 38,
+            fontSize: 28,
+            color: "#745143",
+          }}
+        >
+          Carry less. Grow more.
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+            bottom: 50,
+            left: 90,
+            fontSize: 21,
+            color: "#93654c",
+          }}
+        >
+          solveoi.com
+        </div>
+      </div>
+    ),
+    {
+      ...size,
+    }
   );
 }

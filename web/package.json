@@ -1,10 +1,11 @@
+
 {
   "name": "web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "check:m2": "node scripts/check-m2.mjs"
